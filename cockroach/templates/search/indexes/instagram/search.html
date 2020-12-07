@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Searching Result</title> 
+    <style> span.highlighted { color: red; } </style> 
+</head> 
+<body> 
+    {% load highlight %} 
+    {% if query %} 
+        <h3>Results： 找到 {{ query }} 共有 {{ lcount }} 筆資料</h3>
+        <ol type="1"> 
+        {% for result in page.object_list %}
+            <li>
+            {{ result.object.created_time }} {% highlight result.object.message with query max_length 50 %}<br/> 
+            {% empty %} <p>Nothing...</p>
+            </li>
+            </ol>
+        {% endfor %}
+        </ol> 
+        {% if page.has_previous or page.has_next %} 
+            <div> 
+            {% if page.has_previous %} 
+            <a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %}« 上一頁 {% if page.has_previous %}</a>{% endif %} 
+            | 
+            {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}下一頁 » {% if page.has_next %}</a>{% endif %} 
+            </div> 
+        {% endif %} 
+    {% endif %} 
+</body> 
+</html>
