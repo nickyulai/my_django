@@ -37,12 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders', 
+    'rest_framework', 
+    'graphene_django',
     'cockroach',
     'instagram',
     'haystack',
+    'posts',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,3 +145,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# we whitelist localhost:3000 because that's where frontend will be served
+CORS_ORIGIN_WHITELIST = (
+'https://localhost:3000',
+'https://localhost:8000'
+)
+
+GRAPHENE = {
+    'SCHEMA': 'cockroach.schema.schema'
+}
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+    # your React App domain
+]
