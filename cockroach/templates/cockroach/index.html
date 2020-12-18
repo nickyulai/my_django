@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <p> Hello World! </p>
+
+    <h4 class="title is-4 has-text-link"> IG爬蟲工具 </h4>
+      <h6 class="title is-6 has-text-link">取得Instagram資料 : </h6>
+      <form method='get' action="/getinstagram/">
+        <label>Instagram帳號: </label>
+        {% comment %} <input type="text" id="user_name" name="user_name"> {% endcomment %}
+        <select id="user_name" name="user_name">
+          {% for ig in instagrams %}
+          <option value="{{ ig.user_name }}">{{ ig.cname }} // {{ ig.user_name }} // {{ ig.last_update }}</option>
+          {% endfor %}
+        </select>
+        <input type="submit" value="取得IG個資&貼文">
+      </form>
+
+</body>
+
